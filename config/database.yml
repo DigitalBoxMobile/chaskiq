@@ -12,9 +12,8 @@ default: &default
 development:
   prepared_statements: false
   adapter: postgresql
-  database: <%= ENV.fetch('POSTGRES_DATABASE', 'chaskiq_dev') %>
-  username: <%= ENV.fetch('POSTGRES_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
+  database: crm_development
+  username: postgres
   min_messages: warning
   pool: 15
   timeout: 5000
@@ -32,9 +31,8 @@ development:
 test:
   prepared_statements: false
   adapter: postgresql
-  database: <%= ENV.fetch('POSTGRES_DATABASE', 'chaskiq_test') %>
-  username: <%= ENV.fetch('POSTGRES_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', '') %>
+  database: crm_test
+  username: postgres
   min_messages: warning
   pool: 5
   timeout: 5000
@@ -48,9 +46,7 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch('POSTGRES_DATABASE', 'chaskiq_production') %>
-  username: <%= ENV.fetch('POSTGRES_USERNAME', 'chaskiq_prod') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', 'chaskiq_prod') %>
+  url: <%= ENV['DATABASE_URL'] %>
   prepared_statements: false
   adapter: postgresql
   min_messages: warning
